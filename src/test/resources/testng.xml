@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Vending Machine" verbose="2">
+    <test name="Normal Behavior">
+        <classes>
+            <class
+                    name="vendingmachine.VendingMachineTest"/>
+        </classes>
+    </test>
+
+    <test name="Error paths">
+        <classes>
+            <class
+                    name="vendingmachine.VendingMachineExceptionsTest" />
+        </classes>
+    </test>
+</suite>
