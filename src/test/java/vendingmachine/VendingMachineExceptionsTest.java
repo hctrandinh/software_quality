@@ -25,7 +25,6 @@ public class VendingMachineExceptionsTest extends VendingMachineAbstractTest {
         }
     }
 
-
     @Test(expectedExceptions = {NotSufficientChangeException.class})
     public void testNotSufficientChangeException() throws SoldOutException, TooMuchInsertedMoneyException,
             ItemNotSelectedException, NotFullyPaidException, NotSufficientChangeException {
