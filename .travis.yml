@@ -1,5 +1,7 @@
 sudo: false
 
+install: gradle wrapper --gradle-version 4.4.1
+
 language: java
 
 jdk:
@@ -15,12 +17,7 @@ before_script:
 
 
 script:
-  - ./gradlew clean check
-  - ./gradle test
-  - ./gradlew codeCoverageReport
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - ./gradlew clean test
 
 cache:
   directories:
