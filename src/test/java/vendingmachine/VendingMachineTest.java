@@ -7,15 +7,11 @@ import contract.VendingMachine;
 import exceptions.*;
 import impl.CoinUtil;
 import impl.VendingMachineFactory;
-import impl.VendingMachineImpl;
-import org.junit.Ignore;
 import org.testng.annotations.*;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public final class VendingMachineTest extends VendingMachineAbstractTest {
 
@@ -70,7 +66,7 @@ public final class VendingMachineTest extends VendingMachineAbstractTest {
         assertTrue(change.isEmpty());
     }
 
-    @Test
+    @Test(description = "Buy item with more price")
     public void testBuyItemWithMorePrice() throws SoldOutException, ItemNotSelectedException, NotFullyPaidException,
             NotSufficientChangeException, TooMuchInsertedMoneyException {
         int price = vm.selectItemAndGetPrice(Item.SODA);
@@ -86,13 +82,24 @@ public final class VendingMachineTest extends VendingMachineAbstractTest {
 
         //should be Soda
         assertEquals(Item.SODA, item);
-        //there should not be change
+        //there should be change
         assertTrue(!change.isEmpty());
         //comparing change
         assertEquals(150 - Item.SODA.getPrice(), CoinUtil.getTotal(change));
 
     }
 
+    @Test(description = "get refund")
+    public void testRefund() throws SoldOutException, TooMuchInsertedMoneyException {
+        int price = vm.selectItemAndGetPrice(Item.PEPSI);
+        assertEquals(Item.PEPSI.getPrice(), price);
+        vm.insertCoin(Coin.C50);
+        vm.insertCoin(Coin.C20);
+        vm.insertCoin(Coin.C10);
+        vm.insertCoin(Coin.C10);
+
+        assertEquals(90, CoinUtil.getTotal(vm.refund()));
+    }
 
     @Test
     public void testVendingMachineFactory() {
