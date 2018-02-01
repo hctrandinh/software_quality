@@ -57,12 +57,14 @@ test {
 }
 
 pitest {
+    verbose = true
     targetClasses = ['impl.*']  //by default "${project.group}.*"
     targetTests = ['vendingmachine.*']
     threads = 2
     outputFormats = ['XML', 'HTML']
     enableDefaultIncrementalAnalysis = true
     jvmArgs = ['-Xmx1024m']
+    testPlugin = 'testng'
 }
 
-check.dependsOn jacocoTestReport
+//check.dependsOn
