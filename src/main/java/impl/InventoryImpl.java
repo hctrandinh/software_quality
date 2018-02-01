@@ -23,7 +23,9 @@ public final class InventoryImpl<T> implements Inventory<T> {
     @Override
     public void add(T item, long quantity) {
         long newQuantity = quantity + inventory.getOrDefault(item, DEFAULT_VALUE);
-        inventory.put(item, newQuantity);
+        if(newQuantity >= inventory.getOrDefault(item, DEFAULT_VALUE)) {
+            inventory.put(item, newQuantity);
+        }
     }
 
     @Override
