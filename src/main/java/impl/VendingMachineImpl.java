@@ -178,7 +178,7 @@ public final class VendingMachineImpl implements VendingMachine {
      * Given a finite multiset of coins, finds the minimum distribution of coins to reach an amount (for change).
      * @param pos
      * @param change the amount for which the distribution is sought
-     * @param values the finite set of coin denomitations from which to draw the change
+     * @param values the finite set of coin denominations from which to draw the change
      * @param available the list of available pieces for each denomination of coin
      * @param minCoins the minimal solution
      * @param coins the current solution
