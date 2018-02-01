@@ -19,7 +19,7 @@ import static org.testng.Assert.assertTrue;
 
 public final class VendingMachineTest extends VendingMachineAbstractTest {
 
-    /*private VendingMachine vm;
+    private VendingMachine vm;
 
     @BeforeClass
     public void setUp() {
@@ -40,7 +40,6 @@ public final class VendingMachineTest extends VendingMachineAbstractTest {
     public void afterEachTest(){
         vm.reset();
     }
-    */
 
     @Test(description = "5 item of each in the machine inventory")
     public void testItemInit(){
