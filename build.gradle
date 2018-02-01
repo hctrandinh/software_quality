@@ -58,11 +58,10 @@ test {
 
 pitest {
     targetClasses = ['impl.*']  //by default "${project.group}.*"
+    targetTests = ['vendingmachine.*']
     threads = 2
     outputFormats = ['XML', 'HTML']
     enableDefaultIncrementalAnalysis = true
-    testSourceSets = [sourceSets.test, sourceSets.integrationTest]
-    mainSourceSets = [sourceSets.main, sourceSets.additionalMain]
     jvmArgs = ['-Xmx1024m']
 }
 
