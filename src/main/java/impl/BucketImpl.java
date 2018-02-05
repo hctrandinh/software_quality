@@ -29,7 +29,7 @@ public final class BucketImpl implements Bucket {
 
     @Override
     public List<Coin> getChange() {
-        return new ArrayList<>(change);
+        return change;
     }
 
     @Override
