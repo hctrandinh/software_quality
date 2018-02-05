@@ -1,9 +1,12 @@
 package vendingmachine;
 
+import contract.Bucket;
 import contract.Coin;
 import contract.Item;
 import exceptions.*;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class VendingMachineExceptionsTest extends VendingMachineAbstractTest {
 
@@ -28,21 +31,29 @@ public class VendingMachineExceptionsTest extends VendingMachineAbstractTest {
     @Test(expectedExceptions = {NotSufficientChangeException.class})
     public void testNotSufficientChangeException() throws SoldOutException, TooMuchInsertedMoneyException,
             ItemNotSelectedException, NotFullyPaidException, NotSufficientChangeException {
+        Bucket bucket;
+        List<Coin> refund;
         for (int i = 0; i < 5; i++) {
             vm.selectItemAndGetPrice(Item.COKE);
             vm.insertCoin(Coin.C50);
             vm.insertCoin(Coin.C50);
-            vm.collectItemAndChange();
+            bucket = vm.collectItemAndChange();
+            bucket.clearAll();
+            refund = vm.refund();
 
             vm.selectItemAndGetPrice(Item.PEPSI);
             vm.insertCoin(Coin.C50);
             vm.insertCoin(Coin.C50);
-            vm.collectItemAndChange();
+            bucket = vm.collectItemAndChange();
+            bucket.clearAll();
+            refund = vm.refund();
 
             vm.selectItemAndGetPrice(Item.SPRITE);
             vm.insertCoin(Coin.C50);
             vm.insertCoin(Coin.C50);
-            vm.collectItemAndChange();
+            bucket = vm.collectItemAndChange();
+            bucket.clearAll();
+            refund = vm.refund();
         }
     }
 
