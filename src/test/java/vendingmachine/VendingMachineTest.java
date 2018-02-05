@@ -9,32 +9,16 @@ import impl.CoinUtil;
 import impl.VendingMachineFactory;
 import org.testng.annotations.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.*;
 
 public final class VendingMachineTest extends VendingMachineAbstractTest {
 
-    private VendingMachine vm;
-
-    @BeforeClass
-    public void setUp() {
-        vm = VendingMachineFactory.INSTANCE.createVendingMachine();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        vm = null;
-    }
-
-    @BeforeMethod
-    public void beforeEachTest(){
-        vm.init();
-    }
-
-    @AfterMethod
-    public void afterEachTest(){
-        vm.reset();
+    @Test(description = "Vending machine not null")
+    public void testVendingMachine(){
+        assertNotNull(vm);
     }
 
     @Test(description = "5 item of each in the machine inventory")
@@ -78,7 +62,8 @@ public final class VendingMachineTest extends VendingMachineAbstractTest {
 
         Bucket bucket = vm.collectItemAndChange();
         Item item = bucket.getItem();
-        List<Coin> change = bucket.getChange();
+        List<Coin> change = new ArrayList<>(bucket.getChange());
+        //List<Coin> change = vm.refund();
 
         //should be Soda
         assertEquals(Item.SODA, item);
@@ -101,11 +86,10 @@ public final class VendingMachineTest extends VendingMachineAbstractTest {
         assertEquals(90, CoinUtil.getTotal(vm.refund()));
     }
 
-    @Test
+    @Test(description = "Factory creates a new vending machine each time")
     public void testVendingMachineFactory() {
         VendingMachine vmachine = VendingMachineFactory.INSTANCE.createVendingMachine();
         assertNotEquals(vm, vmachine);
     }
-
 
 }
