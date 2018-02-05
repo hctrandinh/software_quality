@@ -59,7 +59,7 @@ public final class VendingMachineImpl implements VendingMachine {
 
     @Override
     public List<Coin> refund() {
-        List<Coin> toBeRefunded = currentBucket.getChange();
+        List<Coin> toBeRefunded = new ArrayList<>(currentBucket.getChange());
         currentBucket.clearAll();
         return toBeRefunded;
     }
@@ -94,6 +94,9 @@ public final class VendingMachineImpl implements VendingMachine {
         currentBalance = 0;
         totalSales = 0;
         currentBucket.clearAll();
+        minChangeSolution.clear();
+        changeSolution.clear();
+
     }
 
     @Override
@@ -167,6 +170,7 @@ public final class VendingMachineImpl implements VendingMachine {
             available[i] = e.getValue();
             i++;
         }
+
         minChangeSolution.clear();
         changeSolution.clear();
 
