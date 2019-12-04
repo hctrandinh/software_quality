@@ -21,7 +21,6 @@ public final class VendingMachineImpl implements VendingMachine {
     private final LinkedList<Coin> changeSolution;
     private final List<Coin> minChangeSolution;
     private Bucket currentBucket;
-    private long currentBalance;
     private int totalSales;
 
     VendingMachineImpl() {
@@ -51,6 +50,7 @@ public final class VendingMachineImpl implements VendingMachine {
 
     @Override
     public void insertCoin(Coin coin) throws TooMuchInsertedMoneyException {
+        // TODO: FIX
         if (CoinUtil.getTotal(currentBucket.getChange()) < BUCKET_MAX) {
             currentBucket.addCoin(coin);
         } else
@@ -76,6 +76,7 @@ public final class VendingMachineImpl implements VendingMachine {
         if (hasSufficientChangeForTransaction()) {
             totalSales += currentBucket.getItem().getPrice();
             addToCashInventory(currentBucket.getChange());
+            // TODO: FIX
             deductFromItemInventory(currentBucket.getItem());
             currentBucket.clearChange();
             removeChangeFromCashInventory(minChangeSolution);
@@ -91,7 +92,6 @@ public final class VendingMachineImpl implements VendingMachine {
     public void reset() {
         cashInventory.clear();
         itemInventory.clear();
-        currentBalance = 0;
         totalSales = 0;
         currentBucket.clearAll();
         minChangeSolution.clear();
@@ -141,11 +141,6 @@ public final class VendingMachineImpl implements VendingMachine {
         return currentBucket.getItem().getPrice() - CoinUtil.getTotal(currentBucket.getChange());
     }
 
-    private void updateCurrentBalance() {
-        currentBalance = cashInventory.getInventory().entrySet().stream().map(e ->
-                e.getKey().getValue() * e.getValue()).reduce(0L, (a, b) -> a + b);
-    }
-
     private boolean hasSufficientChangeForTransaction() {
         int changeTobeReturned = CoinUtil.getTotal(currentBucket.getChange()) - currentBucket.getItem().getPrice();
         // trivial case = 0: customer has provided the exact amount for the price
@@ -168,6 +163,7 @@ public final class VendingMachineImpl implements VendingMachine {
         for (Entry<Coin, Long> e : virtualInventory.entrySet()) {
             values[i] = e.getKey();
             available[i] = e.getValue();
+            // TODO: FIX
             i++;
         }
 

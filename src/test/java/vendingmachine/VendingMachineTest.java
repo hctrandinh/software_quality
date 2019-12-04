@@ -63,7 +63,6 @@ public final class VendingMachineTest extends VendingMachineAbstractTest {
         Bucket bucket = vm.collectItemAndChange();
         Item item = bucket.getItem();
         List<Coin> change = new ArrayList<>(bucket.getChange());
-        //List<Coin> change = vm.refund();
 
         //should be Soda
         assertEquals(Item.SODA, item);
@@ -71,10 +70,9 @@ public final class VendingMachineTest extends VendingMachineAbstractTest {
         assertTrue(!change.isEmpty());
         //comparing change
         assertEquals(150 - Item.SODA.getPrice(), CoinUtil.getTotal(change));
-
     }
 
-    @Test(description = "get refund")
+    @Test(description = "Get refund")
     public void testRefund() throws SoldOutException, TooMuchInsertedMoneyException {
         int price = vm.selectItemAndGetPrice(Item.PEPSI);
         assertEquals(Item.PEPSI.getPrice(), price);

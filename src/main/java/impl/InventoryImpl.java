@@ -8,6 +8,7 @@ import java.util.Map;
 
 public final class InventoryImpl<T> implements Inventory<T> {
 
+    // TODO: FIX
     private static final long DEFAULT_VALUE = 0L;
     private final Map<T, Long> inventory;
 
@@ -33,6 +34,7 @@ public final class InventoryImpl<T> implements Inventory<T> {
         long newQuantity;
         long oldQuantity = inventory.getOrDefault(item, DEFAULT_VALUE);
         if (inventory.containsKey(item)){
+            //TODO: FIX
             newQuantity =  oldQuantity - quantity;
             if (newQuantity > DEFAULT_VALUE) {
                 inventory.put(item, newQuantity);
